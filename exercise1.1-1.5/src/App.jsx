@@ -19,7 +19,17 @@ const Part = ({content}) => {
     // console.log("Part ", content.name)
     return <li>
         {content.name} {content.exercises}
-    </li>
+           </li>
+}
+
+const ExerciseSum = ({parts}) => {
+    let total = 0
+    return <div>
+        {parts.map(part => {
+            total += part.exercises
+        })}
+        <h4>The total of exercises is: {total}</h4>
+    </div>
 }
 
 const Course = ({course}) => {
@@ -30,8 +40,8 @@ const Course = ({course}) => {
     return <div>
      <Header name={course.name} />
      <Content parts={course.parts} />
+     <ExerciseSum parts={course.parts} />
     </div>
-     
 }
 
 const App = () => {
@@ -53,6 +63,11 @@ const App = () => {
           name: 'State of a component',
           exercises: 14,
           id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
         }
       ]
     }
