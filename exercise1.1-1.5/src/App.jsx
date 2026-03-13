@@ -1,61 +1,63 @@
-const Header = (props) => {
-  return <div>
-    <h1>{props.course.name}</h1>
-  </div>
+
+const Header = ({name}) => {
+    // console.log("HEADER course", name)
+    return <h1>{name}</h1>
 }
 
-const Content = (props) => {
-  console.log('Content props: ', props)
-  return <div>
-    <Part part={props.parts.parts[0]}></Part>
-    <Part part={props.parts.parts[1]}></Part>
-    <Part part={props.parts.parts[2]}></Part>
-  </div>
+const Content = ({parts}) => {
+    // console.log('Content ', parts[0].name)
+    return <div>
+        <ul>
+            {parts.map(part =>
+              <Part key={part.id} content={part}/>  
+            )}
+        </ul>
+    </div>
 }
 
-const Total = (props) => {
-  console.log('Total props: ', props)
-  return <div>
-    <p>
-      Total number of exercises is {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
-    </p>
-  </div>
+const Part = ({content}) => {
+    // console.log("Part ", content.name)
+    return <li>
+        {content.name} {content.exercises}
+    </li>
 }
 
-const Part = (props) => {
-  console.log('Part props: ', props)
-  return <div>
-    <p>{props.part.name} {props.part.exercises}</p>
-  </div>
+const Course = ({course}) => {
+    // console.log("course ",course)
+    // console.log("course.id ",course.id)
+    // console.log("course.name ",course.name)
+    // console.log("course.parts ",course.parts[0])
+    return <div>
+     <Header name={course.name} />
+     <Content parts={course.parts} />
+    </div>
+     
 }
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+    const course = {
+      id: 1,
+      name: 'Half Stack application development',
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        }
+      ]
+    }
+  
+    return <Course course={course} />
   }
-  console.log('course: ', course.parts[0].name)
-
-  return (
-    <div>
-      <Header course={course}></Header>
-      <Content parts={course}></Content>
-      <Total parts={course.parts}></Total>
-      </div>
-  )
-}
-
-export default App
+  
+  export default App
