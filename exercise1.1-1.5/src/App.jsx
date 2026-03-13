@@ -23,13 +23,22 @@ const Part = ({content}) => {
 }
 
 const ExerciseSum = ({parts}) => {
-    let total = 0
+    // let sum = 0
+    const total = parts.reduce((accumulator, currentValue) => {
+        return accumulator += currentValue.exercises
+    }, 0)
+    console.log(total)
     return <div>
-        {parts.map(part => {
-            total += part.exercises
-        })}
         <h4>The total of exercises is: {total}</h4>
     </div>
+
+
+    // <div>
+    //     {parts.map(part => {
+    //         total += part.exercises
+    //     })}
+    //     <h4>The total of exercises is: {total}</h4>
+    // </div>
 }
 
 const Course = ({course}) => {
